@@ -10,9 +10,7 @@ export const engine = () => {
       if (config.questions === undefined)
         throw new Error("Could not find questions.");
 
-      console.log(1111, 'answers')
       const questions = await config.questions({ inquirer, gitInfo })
-      console.log(questions)
       return cz
         .prompt(questions)
         .then((answers) => {

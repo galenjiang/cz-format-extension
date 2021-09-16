@@ -11,7 +11,7 @@ export const engine = () => {
         throw new Error("Could not find questions.");
 
       return cz
-        .prompt(config.questions({ inquirer, gitInfo }))
+        .prompt(config.questions({ inquirer, gitInfo, cz }))
         .then((answers) => {
           if (config.commitMessage === undefined)
             throw new Error("Could not find commitMessage.");

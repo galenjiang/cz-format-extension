@@ -6,12 +6,15 @@ export const engine = () => {
   const { config } = initialize();
 
   const prompter = (cz: CZ, commit: Commit) => {
-    return getGitInfo().then(({ gitInfo }) => {
+    return getGitInfo().then(async ({ gitInfo }) => {
       if (config.questions === undefined)
         throw new Error("Could not find questions.");
 
+      console.log(1111, 'answers')
+      const questions = await config.questions({ inquirer, gitInfo })
+      console.log(questions)
       return cz
-        .prompt(config.questions({ inquirer, gitInfo }))
+        .prompt(questions)
         .then((answers) => {
           if (config.commitMessage === undefined)
             throw new Error("Could not find commitMessage.");
